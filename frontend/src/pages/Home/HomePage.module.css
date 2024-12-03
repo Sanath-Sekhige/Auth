@@ -1,0 +1,43 @@
+/* src/pages/Home/HomePage.module.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logout-icon {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    cursor: pointer;
+    font-size: 30px;
+    color: #6a5acd; /* SlateBlue */
+    transition: color 0.3s ease, transform 0.3s ease; /* Added transform for smooth scaling */
+}
+
+.logout-icon:hover {
+    color: #836fff; /* Lighter SlateBlue for hover */
+    transform: scale(1.2); /* Increase size to 120% */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    width: 500px;
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
