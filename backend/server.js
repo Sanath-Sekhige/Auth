@@ -25,10 +25,10 @@ const clientURL = process.env.NODE_ENV === 'development'
 
 // Setup CORS options
 const corsOptions = {
-    origin: clientURL,
+    origin: '*', // Allow all origins (for testing purposes)
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-};
+  };  
 app.use(cors(corsOptions));
 
 // Security Middleware
