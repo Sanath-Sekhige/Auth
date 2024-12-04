@@ -5,14 +5,22 @@ import { connectDB } from './db/connectDB.js';
 import authRoutes from './routes/auth.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import helmet from 'helmet'; // Added for enhanced security
+import helmet from 'helmet';
+import { fileURLToPath } from 'url';
 
+// Load environment variables
 dotenv.config();
+
+// Fix for __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const clientURL = import.meta.env.MODE === "development" 
-  ? 'http://localhost:3000' 
+
+// Set client URL based on environment
+const clientURL = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3000'
   : process.env.CLIENT_URL;
 
 // Setup CORS options
@@ -21,31 +29,18 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 };
-
 app.use(cors(corsOptions));
 
-// Security Middleware: Helmet to help secure the app by setting various HTTP headers
-app.use(helmet());
+// Security Middleware
+app.use(helmet({
+    crossOriginResourcePolicy: false,
+}));
 
 // Middleware to parse incoming JSON and cookies
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
-app.use('/api/auth', authRoutes);
-
-// Serve static files from React build for production
-if (process.env.NODE_ENV === 'production') {
-    // Set up a static folder for the frontend build
-    app.use(express.static(path.join(__dirname, '../frontend/build')));
-
-    // Catch-all handler to serve index.html for any route that is not an API call
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-    });
-}
-
-// Debugging middleware to log incoming requests - only in development mode
+// Debugging middleware to log incoming requests
 if (process.env.NODE_ENV === 'development') {
     app.use((req, res, next) => {
         console.log('Request URL:', req.url); // Logs all incoming requests
@@ -53,11 +48,26 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
-app.listen(PORT, () => {
+// API Routes
+app.use('/api/auth', authRoutes);
+
+// Serve static files from React build for production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+    });
+}
+
+// Start the server and connect to the database
+const startServer = async () => {
     try {
-        connectDB(); // Ensure DB connection is successful
-        console.log(`Server is running on port: ${PORT}`);
+        await connectDB(); // Ensure DB connection is successful
+        app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
     } catch (error) {
         console.error('Failed to connect to database:', error);
+        process.exit(1); // Exit the process if DB connection fails
     }
-});
+};
+
+startServer();
