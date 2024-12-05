@@ -30,18 +30,8 @@ Thumbs.db
 # Optional: For React app build
 /build/
 
-# Optional: For Next.js
-.next/
-
 # Optional: For Vercel
 .vercel/
-
-# Optional: For Docker
-.docker/
-
-# Optional: For macOS
-.AppleDouble
-.LSOverride
 
 # Optional: For Windows
 Desktop.ini
