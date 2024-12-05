@@ -54,6 +54,7 @@ if (process.env.NODE_ENV === 'production') {
 const startServer = async () => {
     try {
         await connectDB();
+        const PORT = process.env.PORT || 5000;  // Ensure dynamic port in production
         app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
     } catch (error) {
         console.error('Failed to connect to database:', error);

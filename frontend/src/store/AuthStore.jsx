@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_URL = process.env.NODE_ENV === "development"
   ? "http://localhost:5000/api/auth"  // Local development backend URL
-  : "https://auth-veganairs-projects.vercel.app/api/auth";  // Replace with your actual production backend URL
+  : "https://auth-dusky-phi.vercel.app/api/auth";  // Replace with your actual production backend URL
 
 axios.defaults.withCredentials = true;
 
