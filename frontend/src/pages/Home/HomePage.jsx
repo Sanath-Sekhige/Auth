@@ -30,7 +30,7 @@ const HomePage = () => {
     script.onload = () => {
       if (window.Landbot) {
         // Initialize Landbot container after script has loaded
-        new window.Landbot.Container({
+        new window.Landbot.Fullpage({
           container: '#myLandbot',
           configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
         });
