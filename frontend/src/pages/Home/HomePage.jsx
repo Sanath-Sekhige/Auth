@@ -22,15 +22,23 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    // Create a script element for Landbot
     const script = document.createElement('script');
     script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
     script.async = true;
+    
     script.onload = () => {
-      new window.Landbot.Container({
-        container: '#myLandbot',  // Using your custom ID
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',  // Your Landbot config URL
-      });
+      if (window.Landbot) {
+        // Initialize Landbot container after script has loaded
+        new window.Landbot.Container({
+          container: '#myLandbot',
+          configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
+        });
+      } else {
+        console.error('Landbot is not available');
+      }
     };
+    
     document.body.appendChild(script);
 
     return () => {
