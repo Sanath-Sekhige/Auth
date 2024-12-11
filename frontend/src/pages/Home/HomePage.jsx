@@ -26,8 +26,9 @@ const HomePage = () => {
     script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
     script.async = true;
     script.onload = () => {
-      new window.Landbot.Fullpage({
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json', // Updated link
+      new window.Landbot.Container({
+        container: '#myLandbot',  // Using your custom ID
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',  // Your Landbot config URL
       });
     };
     document.body.appendChild(script);
@@ -39,47 +40,18 @@ const HomePage = () => {
 
   return (
     <div className={styles.pageContainer}>
+      {/* Logout Button */}
       <i
         className={`fa fa-sign-out ${styles.logoutIcon}`}
         onClick={handleLogout}
       />
-      <div id="landbot" className={styles.landbot} />
+      
+      {/* Landbot Chatbot Container */}
+      <div id="myLandbot" className={styles.landbot}></div>
+      
       <ToastContainer />
     </div>
   );
 };
 
 export default HomePage;
-
-// const HomePage = () => {
-//   const logout = useAuthStore((state) => state.logout); // Access logout function from AuthStore
-//   const navigate = useNavigate(); // For navigation
-
-//   const handleLogout = async () => {
-//     try {
-//       await logout(); // Perform logout
-//       navigate('/'); // Redirect to /
-//     } catch (error) {
-//       console.error('Error during logout:', error);
-//       toast.error(error.message || 'Error logging out. Please try again.'); // Show error toast
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <i
-//         className={`fa fa-sign-out ${styles['logout-icon']}`}
-//         onClick={handleLogout} // Handle logout on click
-//       />
-//       <div className={styles.container}>
-//         <h1>Home Page</h1>
-//         <p>Welcome to your homepage!</p>
-//       </div>
-
-//       {/* Toast Container to show notifications */}
-//       <ToastContainer />
-//     </div>
-//   );
-// };
-
-// export default HomePage;
