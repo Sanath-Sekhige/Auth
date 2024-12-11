@@ -27,7 +27,7 @@ const HomePage = () => {
     script.async = true;
     script.onload = () => {
       new window.Landbot.Fullpage({
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2711907-XMHUM9B2YY34U5CJ/index.json',
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json', // Updated link
       });
     };
     document.body.appendChild(script);
