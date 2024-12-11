@@ -2,51 +2,50 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif; /* Set your font family globally */
-}
-
-body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  body {
     font-family: 'Montserrat', sans-serif;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     height: 100vh;
     margin: 0;
-    overflow: hidden; /* Prevent scrolling when the chatbot is active */
-}
-
-/* Logout Icon */
-.logout-icon {
+    overflow: hidden;
+  }
+  
+  .pageContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Logout Icon */
+  .logoutIcon {
     position: fixed;
     top: 25px;
     right: 25px;
     cursor: pointer;
     font-size: 30px;
     color: #6a5acd; /* SlateBlue */
-    z-index: 1000; /* Ensure it appears above other elements */
-    transition: color 0.3s ease, transform 0.3s ease; /* Smooth scaling for hover effect */
-}
-
-.logout-icon:hover {
+    z-index: 1000; /* Ensure it stays above other elements */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .logoutIcon:hover {
     color: #836fff; /* Lighter SlateBlue for hover */
     transform: scale(1.2); /* Increase size to 120% */
-}
-
-/* Chatbot Fullpage Container */
-#landbot {
+  }
+  
+  /* Chatbot Container */
+  .landbot {
     position: absolute;
-    top: 0;
+    top: 80px; /* Ensure it does not overlap with the logout button */
     left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 0; /* Ensure it doesn't overlap the logout icon */
-}
-
-/* Heading */
-h1 {
-    font-size: 36px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
+    height: calc(100% - 80px); /* Fill the rest of the screen */
+    z-index: 0;
+  }
+  
 
 
 
