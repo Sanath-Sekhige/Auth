@@ -22,23 +22,19 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    // Create a script element for Landbot
     const script = document.createElement('script');
     script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
     script.async = true;
-    
+    script.setAttribute('SameSite', 'None');
+    script.setAttribute('Secure', 'true');
+
     script.onload = () => {
-      if (window.Landbot) {
-        // Initialize Landbot container after script has loaded
-        new window.Landbot.Fullpage({
-          container: '#myLandbot',
-          configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
-        });
-      } else {
-        console.error('Landbot is not available');
-      }
+      new window.Landbot.Container({
+        container: '#myLandbot',
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
+      });
     };
-    
+
     document.body.appendChild(script);
 
     return () => {
@@ -48,15 +44,11 @@ const HomePage = () => {
 
   return (
     <div className={styles.pageContainer}>
-      {/* Logout Button */}
       <i
         className={`fa fa-sign-out ${styles.logoutIcon}`}
         onClick={handleLogout}
       />
-      
-      {/* Landbot Chatbot Container */}
       <div id="myLandbot" className={styles.landbot}></div>
-      
       <ToastContainer />
     </div>
   );

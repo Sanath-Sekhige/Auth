@@ -15,42 +15,39 @@
     overflow: hidden;
   }
   
-  /* Page Container */
   .pageContainer {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 20px; /* Add some padding for spacing */
+    padding: 20px;
   }
   
-  /* Logout Icon */
   .logoutIcon {
     position: fixed;
     top: 25px;
     right: 25px;
     cursor: pointer;
     font-size: 30px;
-    color: #6a5acd; /* SlateBlue */
-    z-index: 1000; /* Ensure it stays above other elements */
+    color: #6a5acd;
+    z-index: 1000;
     transition: color 0.3s ease, transform 0.3s ease;
   }
   
   .logoutIcon:hover {
-    color: #836fff; /* Lighter SlateBlue for hover */
-    transform: scale(1.2); /* Increase size to 120% */
+    color: #836fff;
+    transform: scale(1.2);
   }
   
-  /* Landbot Container */
   .landbot {
     position: fixed;
-    bottom: 20px; /* Position chatbot at the bottom of the screen */
+    bottom: 20px;
     left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    width: 400px; /* Adjust width as needed */
-    height: 500px; /* Adjust height as needed */
+    transform: translateX(-50%);
+    width: 400px;
+    height: 500px;
     z-index: 10;
-    border-radius: 10px; /* Add rounded corners for styling */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-    overflow: hidden; /* Ensure content doesn't overflow */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
   }
   
