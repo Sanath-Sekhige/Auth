@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./VerificationPage.module.css";
-import { toast, ToastContainer } from "react-toastify"; // Import ToastContainer
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuthStore } from "../../store/AuthStore";
 
@@ -32,6 +32,14 @@ const VerificationPage = () => {
     }
   };
 
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace" && digits[index] === "") {
+      if (index > 0) {
+        document.getElementById(`digit${index}`).focus();
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const verificationCode = digits.join("");
@@ -44,15 +52,15 @@ const VerificationPage = () => {
     setIsSubmitting(true);
 
     try {
-      console.log("Verifying email with code:", verificationCode); // Add debugging log
+      console.log("Verifying email with code:", verificationCode);
 
       await verifyEmail(verificationCode);
 
-      console.log("Verification successful, showing success toast."); // Log after successful verification
-      notifySuccess(); // Trigger success toast
+      console.log("Verification successful, showing success toast.");
+      notifySuccess();
     } catch (error) {
-      console.error("Error verifying code:", error); // Log the error
-      toast.error("Error verifying code."); // Show error notification
+      console.error("Error verifying code:", error);
+      toast.error("Error verifying code.");
     } finally {
       setIsSubmitting(false);
     }
@@ -71,6 +79,7 @@ const VerificationPage = () => {
               value={digit}
               id={`digit${index + 1}`}
               onChange={(e) => handleInputChange(e, index)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               required
               className={styles.inputField}
               autoComplete="off"
@@ -83,7 +92,6 @@ const VerificationPage = () => {
         {isSubmitting && <div className={styles.loader}></div>}
       </form>
       
-      {/* Add ToastContainer here */}
       <ToastContainer 
         position="top-center" 
         autoClose={5000} 

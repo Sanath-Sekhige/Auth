@@ -28,13 +28,13 @@ body {
     right: 25px;
     cursor: pointer;
     font-size: 30px;
-    color: #6a5acd;
+    color: #7E57C2;
     z-index: 1000;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .logoutIcon:hover {
-    color: #836fff;
+    color: #5E35B1;
     transform: scale(1.2);
 }
 

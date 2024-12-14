@@ -1,16 +1,16 @@
 //src/pages/Auth/AuthPage.jsx
 
 import React, { useState } from 'react';
-import { useAuthStore } from '../../store/AuthStore'; // Adjust the path as necessary
-import styles from './AuthPage.module.css'; // Import CSS module
-import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
-import 'react-toastify/dist/ReactToastify.css'; // Import the default styles for the toast
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { useAuthStore } from '../../store/AuthStore';
+import styles from './AuthPage.module.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const { signup, login, isLoading, error } = useAuthStore();
-  const navigate = useNavigate(); // Hook to navigate to different pages
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,43 +24,41 @@ function AuthPage() {
 
   const handleRegisterClick = () => {
     setIsSignUp(true);
-    resetFields(); // Reset fields when switching to Sign Up
+    resetFields();
   };
 
   const handleLoginClick = () => {
     setIsSignUp(false);
-    resetFields(); // Reset fields when switching to Sign In
+    resetFields();
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isSignUp) {
-      // Handle sign up
       try {
         await signup(email, password, name);
-        toast.success('Successfully signed up!');
-        // Open the verify-email page in a new tab
-        window.open('/verify-email', '_blank'); // This opens the page in a new tab
+        window.open('/verify-email', '_blank');
       } catch (err) {
         toast.error(error || 'Error during sign up');
       }
     } else {
-      // Handle login
       try {
-        await login(email, password);
-        toast.success('Successfully logged in!');
-        // Navigate to home page
-        navigate('/home');
+        const response = await login(email, password);
+        console.log('Response:', response);
+        if(response.user.isVerified) {
+          toast.success('Successfully logged in!');
+          navigate('/home');
+        } else {
+          toast.info('Please verify your email.');
+        }
       } catch (err) {
         toast.error(error || 'Error during login');
       }
     }
   };
 
-  // Password reset function
   const handlePasswordReset = () => {
-    // Open the forgot password page in a new tab
     window.open('/forgot-password', '_blank');
   };  
 
@@ -69,7 +67,6 @@ function AuthPage() {
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} closeOnClick draggable pauseOnHover />
 
       <div className={`${styles.container} ${isSignUp ? styles.active : ''}`}>
-        {/* Sign Up Form */}
         <div className={`${styles['form-container']} ${styles['sign-up']}`}>
           <form onSubmit={handleSubmit}>
             <h1>Create Account</h1>
@@ -101,7 +98,6 @@ function AuthPage() {
           </form>
         </div>
 
-        {/* Sign In Form */}
         <div className={`${styles['form-container']} ${styles['sign-in']}`}>
           <form onSubmit={handleSubmit}>
             <h1>Sign In</h1>
@@ -129,7 +125,6 @@ function AuthPage() {
           </form>
         </div>
 
-        {/* Toggle Panel */}
         <div className={styles['toggle-container']}>
           <div className={styles.toggle}>
             <div className={`${styles['toggle-panel']} ${styles['toggle-left']}`}>

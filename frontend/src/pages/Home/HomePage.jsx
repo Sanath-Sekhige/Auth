@@ -1,5 +1,3 @@
-// src/pages/Home/HomePage.jsx
-
 import React, { useEffect } from 'react';
 import { useAuthStore } from '../../store/AuthStore';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +21,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js'; // Updated script src
+    script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.js';
     script.async = true;
     script.setAttribute('SameSite', 'None');
     script.setAttribute('Secure', 'true');
@@ -31,7 +29,7 @@ const HomePage = () => {
     script.onload = () => {
       new window.Landbot.Container({
         container: '#myLandbot',
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json', // Updated config URL
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
       });
     };
 
