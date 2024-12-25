@@ -29,7 +29,7 @@ const HomePage = () => {
     script.onload = () => {
       new window.Landbot.Container({
         container: '#myLandbot',
-        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-2715655-XHEJJ82H6AMIZKUS/index.json',
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-1234567-ABCXYZ12345/index.json',
       });
     };
 
